@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checklist By ZeroDayCops — Track Every Check. Miss Nothing.</title>
+  <meta name="description" content="The complete interactive security testing checklist by ZeroDayCops. Covers Web, API, Android, iOS, Thick Client and Web3 smart contract assessments. Track your progress locally.">
+  <meta property="og:title" content="Checklist By ZeroDayCops — Security Testing Checklist">
+  <meta property="og:description" content="Track every check. Miss nothing. Interactive security testing checklist for bug bounty hunters and pentesters.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Checklist By ZeroDayCops">
+  <meta name="twitter:description" content="Interactive security testing checklist covering Web, API, Mobile, Thick Client & Web3.">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ── Mobile Header ── -->
+  <header class="mobile-header" id="mobileHeader">
+    <button class="hamburger-btn" id="menuToggle" aria-label="Open navigation menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+    <span class="mobile-logo-text">ZeroDayCops</span>
+    <span class="mobile-progress-text" id="mobileProgress">0%</span>
+  </header>
+
+  <!-- ── Sidebar Overlay (mobile) ── -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- ── App Layout ── -->
+  <div class="app-layout">
+
+    <!-- ═══ SIDEBAR ═══ -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-inner">
+
+        <!-- Logo -->
+        <div class="logo-area">
+          <div class="logo-icon">
+            <img src="logo.png" alt="ZeroDayCops Logo" width="38" height="38">
+          </div>
+          <div class="logo-text">
+            <div class="logo-name">ZeroDayCops</div>
+            <div class="logo-tagline">Checklist</div>
+          </div>
+        </div>
+
+        <!-- Actions row -->
+        <div class="sidebar-actions">
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">
+            <!-- Sun icon (shown in dark mode) -->
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="5"/>
+              <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+            <!-- Moon icon (shown in light mode) -->
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </button>
+
+        </div>
+
+        <!-- Progress Ring -->
+        <div class="progress-ring-section">
+          <div class="ring-container">
+            <svg width="120" height="120">
+              <circle class="ring-track" cx="60" cy="60" r="52"/>
+              <circle class="ring-fill" id="progressRing" cx="60" cy="60" r="52"
+                stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
+            </svg>
+            <div class="ring-label">
+              <span class="ring-percent" id="ringPercent">0%</span>
+              <span class="ring-count" id="ringCount">0 / 0</span>
+            </div>
+          </div>
+          <div class="stat-cards">
+            <div class="stat-card">
+              <div class="stat-value" id="totalChecks">0</div>
+              <div class="stat-label">Checks</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-value" id="doneChecks">0</div>
+              <div class="stat-label">Done</div>
+            </div>
+          </div>
+          <button class="reset-all-btn" id="resetAllBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+              <path d="M3 3v5h5"/>
+            </svg>
+            Reset progress
+          </button>
+        </div>
+
+        <!-- Domain Nav -->
+        <nav class="domain-nav" id="domainNav">
+          <p class="domain-nav-label">Domains</p>
+          <!-- Domain buttons injected by JS -->
+        </nav>
+
+        <!-- Footer -->
+        <div class="sidebar-footer">
+          Built by ZeroDayCops. All checklist content is original. Use responsibly and only with explicit authorization.
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- ═══ MAIN ═══ -->
+    <div class="main-content">
+
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-bg-dots"></div>
+        <div class="hero-glow"></div>
+        <div class="hero-inner">
+          <div class="hero-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M13 5h8M13 12h8M13 19h8M3 17l2 2 4-4M3 7l2 2 4-4"/>
+            </svg>
+            <span id="heroBadge">0 categories · 0 checks</span>
+          </div>
+          <h1>The complete <span class="accent">security testing</span> checklist</h1>
+          <p class="hero-desc">An interactive playbook covering Web, API, Android, iOS, Thick Client and Web3 / Smart Contract security assessments. Track every check. Miss nothing.</p>
+          <div class="severity-badges">
+            <span class="severity-badge critical">Critical</span>
+            <span class="severity-badge high">High</span>
+            <span class="severity-badge medium">Medium</span>
+            <span class="severity-badge low">Low</span>
+            <span class="severity-badge info">Info</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Sticky Search Bar -->
+      <div class="search-bar" id="searchBar">
+        <div class="search-input-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="M21 21l-4.34-4.34"/>
+          </svg>
+          <input type="text" class="search-input" id="searchInput" placeholder="Search checks…" autocomplete="off">
+        </div>
+        <button class="filter-btn" id="uncheckedFilter">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+          </svg>
+          <span class="hidden-mobile">Unchecked only</span>
+        </button>
+        <button class="filter-btn" id="expandAllBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M7 15l5 5 5-5M7 9l5-5 5 5"/>
+          </svg>
+          <span class="hidden-mobile">Expand all</span>
+        </button>
+        <span class="search-count" id="searchCount">0 / 0</span>
+      </div>
+
+      <!-- Category list -->
+      <main class="categories-container" id="categoriesContainer">
+        <!-- Rendered by JS -->
+      </main>
+
+    </div>
+  </div>
+
+  <!-- ── Confirmation Modal ── -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalText">
+      <div class="modal-title" id="modalTitle">Reset progress?</div>
+      <div class="modal-text" id="modalText">This will uncheck all items. This action cannot be undone.</div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" id="modalCancel">Cancel</button>
+        <button class="btn btn-danger" id="modalConfirm">Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Toast ── -->
+  <div class="toast" id="toast">
+    <svg class="toast-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M9 11l3 3L22 4"/>
+      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+    </svg>
+    <span id="toastText">Progress saved!</span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/checklistData.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
